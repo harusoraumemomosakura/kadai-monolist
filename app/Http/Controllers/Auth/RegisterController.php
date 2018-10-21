@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\RegistersUsers; //トレイトRegistersUsers で定義されているメソッドをそのまま取り込む
 
 class RegisterController extends Controller
 {
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/'; //ログイン後のリダイレクト先はトップページに指定
 
     /**
      * Create a new controller instance.
@@ -45,7 +45,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data)//ユーザ登録の際のフォームデータのバリデーション
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
@@ -62,10 +62,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return User::create([ //create() を使って一気にデータを代入し、そのままユーザを作成する
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => bcrypt($data['password']), //｢bcrypt()｣で暗号化してから代入
         ]);
     }
 }

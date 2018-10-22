@@ -28,6 +28,10 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+// ランキング
+Route::get('ranking/want', 'RankingController@want')->name('ranking.want');
+Route::get('ranking/have', 'RankingController@have')->name('ranking.have');
+
 //ログイン認証付きのルーティング
 Route::group(['middleware' => 'auth'], function () { //ルーティングのグループを作成
               //['middleware' => ['auth']]ミドルウェアでこのグループに書かれたルーティングは必ずログイン認証を確認させる

@@ -31,5 +31,10 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 //ログイン認証付きのルーティング
 Route::group(['middleware' => 'auth'], function () { //ルーティングのグループを作成
               //['middleware' => ['auth']]ミドルウェアでこのグループに書かれたルーティングは必ずログイン認証を確認させる
-    Route::resource('items', 'ItemsController', ['only' => ['create']]); //['only' => ['create']]実装するアクションを絞り込む
+    Route::resource('items', 'ItemsController', ['only' => ['create', 'show']]); //['only' => ['create']]実装するアクションを絞り込む
+    Route::post('want', 'ItemUserController@want')->name('item_user.want');
+    Route::delete('want', 'ItemUserController@dont_want')->name('item_user.dont_want');
+    Route::post('have', 'ItemUserController@have')->name('item_user.have');
+    Route::delete('have', 'ItemUserController@dont_have')->name('item_user.dont_have');
+    Route::resource('users', 'UsersController', ['only' => ['show']]);
 });
